@@ -18,7 +18,7 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
     got `06 03 4F 4B 02` ("OK", model 2). The module committed; a handshake on
     `E0 D3 C2 B1 A0` / ch 78 answered with ID, model 2 and calibration words.
   - `mdp status`: temperature 23.0 °C, output off, input ≈ 11.96 V, setpoints
-    9000 mV / "20" (current unit unconfirmed), measured ≈ 2 mV.
+    9000 mV / 20 mA, measured ≈ 2 mV.
   - `mdp set-voltage 3300` with output off → next poll setVoltage = 3300.
 - **Output on/off verified with an independent meter [HW]** (Rigol DM858E, DC
   volts only, probes on the P906 output, no load): off 0.23 mV → `output on`
@@ -27,8 +27,7 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
   caps into the meter's 10 MΩ, no bleeder). Owner rule: **never measure current
   with the DMM** (probes sit across the output — that would short it).
 - **Next (hardware, owner approval per write):**
-  1. Settle the `set-current` unit: owner reads the current limit on the P906
-     screen next to our `setCurrent` = 20, then one `set-current` and re-poll.
+  1. One `set-current` (unit now known: mA) and re-poll.
   2. Confirm `RX_ADDR.TXT` now exists on the P906 USB drive (read-only listing).
   3. Optional: pair a second module on `E1 D3 C2 B1 A0` (multi-PSU, untested).
 
@@ -67,10 +66,6 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
 
 ## Open questions
 
-- Unit of the current setpoint (`setCurrent` reads 20 next to 9000 mV).
-  Candidates to check against the screen: 20 mA (mA), 40 mA (mA/2, the
-  firmware's internal unit per `HARDWARE.md`), 200 mA (10 mA), 2 A (100 mA)
-  [INF]. One `set-current` + re-poll then confirms.
 - Meaning of type-0x07 status bytes 2–3 and the BCD4 at 10–11.
 - Why the module is deaf for ~1.4 s after a beacon reply.
 - Multiple modules on one bridge (protocol supports it, untested).
@@ -82,4 +77,7 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
 - Pairing commits only when the "OK" reply is ACKed (TX_DS) [HW+INF].
 - Address byte order on the nRF52840 (PREFIX/BASE mapping in `PROTOCOL.md` §0) [HW].
 - Voltage setpoint unit is mV [HW].
+- Current setpoint unit is mA [HW]: the P906 screen showed 3.300 V / 0.020 A
+  (output off) while our poll read setVoltage 3300 / setCurrent 20
+  (owner photo, `images/setup.jpg`). `set-current` itself not yet tried.
 - P906 firmware is now in hand (manifest `P906_FW_v3.01.md`).
