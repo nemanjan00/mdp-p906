@@ -36,7 +36,7 @@ The pitfalls that generalize to other targets go in `METHODOLOGY.md` instead.
 - **Pairing can overwrite a module's stored address** — read its "Tx and Rx Addr"
   page and record it before any pairing attempt. [INF]
 
-## Bridge (nice!nano / nRF52840)
+## Bridge (nRF52840 Pro Micro clone, nice!nano-compatible)
 
 - **Board wedged, USB dead** — a busy-wait timed with `micros()` while
   interrupts were off never ended (micros doesn't advance then) and froze USB too.

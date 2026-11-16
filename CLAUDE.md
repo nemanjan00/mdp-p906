@@ -22,18 +22,22 @@ app), via a clean-room reimplementation of the vendor protocols.
   (CommonJS, tabs, promises, jest, eslint, yarn).
 - Ask the owner before any write to a real device (M01 flash, P906 config, pairing).
 
-## System (as understood so far — [INF])
+## System
 
 ```
-PC ──USB CDC (VCP)──> MDP-M01 (STM32, display/controller) ──nRF24L01 2.4 GHz──> P906 module(s)
+PC ──USB serial──> nRF52840 bridge (bridge/) ──nRF24 ESB 2.4 GHz──> P906 module(s)
+     host/ (mdp CLI)
 ```
 
-Two possible control paths: (1) PC→M01 USB serial protocol, (2) talk nRF24 to the
-P906 directly, bypassing the M01. See `mdp/STATE.md` for which is being pursued.
+The direct-radio path is the one in use: it replaces the vendor MDP-M01 display
+unit, and pairing, status, set-voltage and output on/off work [HW]. The M01 (and
+its PC→M01 USB protocol) is only a reference — its firmware was the first source
+for `mdp/PROTOCOL.md`. A clean-room P906 firmware is being explored from static
+analysis (`mdp/HARDWARE.md`, [INF]).
 
 ## Code
 
-- `bridge/` — nRF52840 (nice!nano) firmware, PlatformIO + Adafruit core. Turns
+- `bridge/` — nRF52840 Pro Micro clone (nice!nano-compatible) firmware, PlatformIO + Adafruit core. Turns
   USB serial lines into nRF24-compatible ESB packets. Build: `pio run`, then
   `python3 tools/hex2uf2.py .pio/build/nicenano/firmware.hex fw.uf2` and copy
   to the NICENANO drive (send `B` to the running bridge to get the drive).
@@ -45,3 +49,4 @@ P906 directly, bypassing the M01. See `mdp/STATE.md` for which is being pursued.
 
 - `mdp/manifests/M01_FW_v2.03.md` — M01 firmware v2.03
 - `mdp/manifests/MDP_PC_V1.2.1.md` — PC "Upper Computer" software V1.2.1
+- `mdp/manifests/P906_FW_v3.01.md` — P906 module firmware v3.01

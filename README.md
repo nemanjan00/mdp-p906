@@ -29,7 +29,9 @@ Details and open questions: `mdp/STATE.md`.
 
 ## Hardware
 
-- An nRF52840 board with the Adafruit UF2 bootloader (tested: nice!nano).
+- An nRF52840 board with the Adafruit UF2 bootloader. Tested: an nRF52840
+  "Pro Micro" clone, nice!nano-compatible (its bootloader identifies as
+  nice!nano and mounts a `NICENANO` drive).
 - The P906 itself. Its USB port is only needed for firmware updates and for its
   own USB drive; control happens over the radio.
 
@@ -83,7 +85,8 @@ node bin/mdp.js output off
 ```
 
 Options: `--port /dev/ttyACM0`, `--addr <hex5>`, `--ch <n>`, `--id <hex4>`
-(optional — the module also accepts an all-zero ID).
+(the module's radio ID, shown during pairing; firmware analysis suggests an
+all-zero ID is also accepted, not yet tested on hardware).
 
 Notes:
 - A set command is answered with a short status; poll `status` to confirm the
