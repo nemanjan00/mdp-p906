@@ -18,6 +18,13 @@ Keep tagging new claims.
   - `mdp status` [HW]: temperature 23.0 °C, output off, input ≈ 11.96 V,
     setpoints 9000 mV / "20" (current unit unconfirmed), measured ≈ 2 mV.
   - `mdp set-voltage 3300` with output off → next poll setVoltage = 3300 [HW].
+- **Output on/off verified with an independent meter [HW]** (Rigol DM858E, DC
+  volts only, probes on the P906 output, no load):
+  off 0.23 mV → `output on` (set 3.300 V) → **3.30405 V** on the DMM, P906 reports
+  3299 mV, outputOn true → `output off` → outputOn false, voltage decays
+  3.03→0.96 V over ~15 s (output caps into the meter's 10 MΩ; no bleeder load).
+  Owner rule: **never measure current with the DMM** (probes sit across the
+  output — that would short it).
 - **Next:** owner confirms the screen (3.300 V; what the current limit shows →
   unit of `setCurrent`); then `set-current`, then `output on` into a safe load
   (owner approval per write). Also confirm `RX_ADDR.TXT` now exists on the drive.

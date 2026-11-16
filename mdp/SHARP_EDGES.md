@@ -77,5 +77,12 @@ The pitfalls that generalize to other targets go in `METHODOLOGY.md` instead.
 
 ## Test / measurement
 
+- **DMM on the P906 output: voltage only.** The DM858E (SCPI on TCP 5025, not
+  5555) has its probes across the PSU terminals; a current measurement would
+  short the output through the meter. [owner rule]
+- **"Output off" doesn't mean 0 V immediately** — with no load the output caps
+  take tens of seconds to bleed down through the meter. Don't read a slow decay
+  as the output still being on; check `outputOn` and the decay curve. [HW]
+
 - **A lost ACK ≠ not written** — read back before deciding.
 - **Liveness = a real reply** (serial/voltage reading), never "the port opened".
