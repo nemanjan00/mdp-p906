@@ -24,7 +24,7 @@ Tested on one P906 (firmware v3.01):
 | Read status (temperature, output state, input voltage, setpoints, V/I readings) | works |
 | Set voltage | works — confirmed by poll |
 | Output on/off | works — confirmed with an external DMM |
-| Set current limit | implemented; unit likely mA, not yet confirmed on hardware |
+| Set current limit | implemented, unit not yet confirmed on hardware |
 | Multiple modules | supported by the protocol (one address per module), untested |
 
 Details and open questions: `mdp/STATE.md`.
@@ -81,7 +81,7 @@ M01's first slot. Pair additional modules with their own address, e.g.
 ```sh
 node bin/mdp.js status                # temperature, output, setpoints, readings
 node bin/mdp.js set-voltage 3300      # millivolts
-node bin/mdp.js set-current 1000      # milliamps (likely; being confirmed)
+node bin/mdp.js set-current 1000      # milliamps (unit still being confirmed)
 node bin/mdp.js output on
 node bin/mdp.js output off
 ```
