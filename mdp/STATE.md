@@ -11,6 +11,18 @@ Keep tagging new claims.
 
 ## Now
 
+- **2026-11-16 17:08–17:12 UTC: CONTROL WORKS [HW].**
+  - `mdp pair --direct` (repeat assign while the P906 shows "Match RX Addr..")
+    got `06 03 4F 4B 02` ("OK", model 2) → module committed; handshake on
+    `E0 D3 C2 B1 A0` / ch 78 answered with ID, model 2 and calibration words.
+  - `mdp status` [HW]: temperature 23.0 °C, output off, input ≈ 11.96 V,
+    setpoints 9000 mV / "20" (current unit unconfirmed), measured ≈ 2 mV.
+  - `mdp set-voltage 3300` with output off → next poll setVoltage = 3300 [HW].
+- **Next:** owner confirms the screen (3.300 V; what the current limit shows →
+  unit of `setCurrent`); then `set-current`, then `output on` into a safe load
+  (owner approval per write). Also confirm `RX_ADDR.TXT` now exists on the drive.
+
+
 - **2026-11-16 (end of session): radio link to the P906 works [HW], pairing not
   yet committed.** Bench (lab host — see CLAUDE.local.md): P906 on USB
   (USB mode = only a drive with `Q_SET.TXT` presets — no control channel), nice!nano
