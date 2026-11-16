@@ -12,7 +12,7 @@ PC ──USB serial──> nRF52840 bridge ──2.4 GHz (nRF24 ESB, 2 Mbps)─�
      host/ (mdp CLI)     bridge/
 ```
 
-![nRF52840 Pro Micro clone bridge next to a P906 showing 3.300 V / 0.020 A set over the radio](images/setup.jpg)
+![nRF52840 Pro Micro clone bridge next to a P906 power module](images/setup.jpg)
 
 ## Status
 
@@ -24,7 +24,7 @@ Tested on one P906 (firmware v3.01):
 | Read status (temperature, output state, input voltage, setpoints, V/I readings) | works |
 | Set voltage | works — confirmed by poll |
 | Output on/off | works — confirmed with an external DMM |
-| Set current limit | implemented; unit is mA (matches the P906 screen), set not yet tested |
+| Set current limit | implemented; unit likely mA, not yet confirmed on hardware |
 | Multiple modules | supported by the protocol (one address per module), untested |
 
 Details and open questions: `mdp/STATE.md`.
@@ -81,7 +81,7 @@ M01's first slot. Pair additional modules with their own address, e.g.
 ```sh
 node bin/mdp.js status                # temperature, output, setpoints, readings
 node bin/mdp.js set-voltage 3300      # millivolts
-node bin/mdp.js set-current 1000      # milliamps
+node bin/mdp.js set-current 1000      # milliamps (likely; being confirmed)
 node bin/mdp.js output on
 node bin/mdp.js output off
 ```
