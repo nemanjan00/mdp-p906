@@ -1,0 +1,29 @@
+{
+	"name": "mdp-host",
+	"version": "0.1.0",
+	"description": "Clean-room control of Miniware MDP P90x power modules over an nRF52840 radio bridge",
+	"private": true,
+	"license": "MIT",
+	"bin": {
+		"mdp": "bin/mdp.js"
+	},
+	"scripts": {
+		"mdp": "node bin/mdp.js",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"lint": "eslint src/ bin/"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"forceExit": true
+	},
+	"dependencies": {
+		"queue-promised": "^0.0.31"
+	},
+	"devDependencies": {
+		"@babel/core": "^8.1.2",
+		"@babel/eslint-parser": "^8.1.2",
+		"eslint": "8",
+		"jest": "^30.5.2"
+	}
+}
