@@ -68,6 +68,9 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
 ## Open questions
 
 - Unit of the current setpoint (`setCurrent` reads 20 next to 9000 mV).
+  Candidates to check against the screen: 20 mA (mA), 40 mA (mA/2, the
+  firmware's internal unit per `HARDWARE.md`), 200 mA (10 mA), 2 A (100 mA)
+  [INF]. One `set-current` + re-poll then confirms.
 - Meaning of type-0x07 status bytes 2–3 and the BCD4 at 10–11.
 - Why the module is deaf for ~1.4 s after a beacon reply.
 - Multiple modules on one bridge (protocol supports it, untested).
@@ -78,5 +81,5 @@ Direct-radio control works: PC → nRF52840 bridge → P906, no M01 [HW].
 
 - Pairing commits only when the "OK" reply is ACKed (TX_DS) [HW+INF].
 - Address byte order on the nRF52840 (PREFIX/BASE mapping in `PROTOCOL.md` §0) [HW].
-- Setpoint units: voltage in mV [HW]; P906 firmware is now in hand (manifest
-  `P906_FW_v3.01.md`).
+- Voltage setpoint unit is mV [HW].
+- P906 firmware is now in hand (manifest `P906_FW_v3.01.md`).
