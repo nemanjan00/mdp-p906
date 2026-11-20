@@ -2,7 +2,6 @@
 	"name": "mdp-host",
 	"version": "0.1.0",
 	"description": "Clean-room control of Miniware MDP P90x power modules over an nRF52840 radio bridge",
-	"private": true,
 	"license": "MIT",
 	"bin": {
 		"mdp": "bin/mdp.js"
@@ -25,5 +24,10 @@
 		"@babel/eslint-parser": "^8.1.2",
 		"eslint": "8",
 		"jest": "^30.5.2"
-	}
+	},
+	"main": "src/psu/index.js",
+	"files": [
+		"bin",
+		"src"
+	]
 }
